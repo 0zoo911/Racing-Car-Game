@@ -193,8 +193,13 @@ if __name__ == '__main__':
 
         if vry_val > 1015:
             player.dx = 4
+            car.rect.right = player.dx
+            crash_img_rect.center = [player.rect.right, (player.rect.center[1] + car.rect.center[1]) / 2]
+
         elif vry_val <= 100:
             player.dx = -4
+            car.rect.left = player.dx
+            crash_img_rect.center = [player.rect.left, (player.rect.center[1] + car.rect.center[1]) / 2]
         else:
            player.dx = 0
                        
@@ -231,7 +236,7 @@ if __name__ == '__main__':
                 if player.check_crash(cars[i]):
                     crash = True
                     crash_img_rect.center = [player.rect.center[0], player.rect.top]
-                    screen.blit(crash_img, crash_img_rect)
+                    screen.blit(crash_img, (player.x-5, player.y-50))
                     pygame.display.update()
                     pygame.mixer.music.stop()
                     sound_crash.play()
